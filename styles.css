@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: start;
+    gap: 5px;
+    margin-bottom: 10px;
+    background-color: #f3f3f3;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.toolbar button {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+}
+
+.toolbar button:hover {
+    background-color: #e7e7e7;
+}
+
+.toolbar button i {
+    font-size: 16px;
+}
+
+.editor {
+    min-height: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    overflow-y: auto;
+    font-size: 16px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
+
+pre {
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 10px 0;
+    background-color: #282a36; /* Dracula theme background */
+    color: #f8f8f2; /* Dracula theme foreground */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    white-space: pre-wrap;
+}
+
+code.hljs {
+    display: block;
+    white-space: pre-wrap;
+}
+
+
