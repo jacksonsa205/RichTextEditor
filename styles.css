@@ -1,11 +1,20 @@
+/* Reset básico do corpo */
 body {
+    background: url('imagens/imagem-fundo.png') no-repeat center center fixed;
+    background-size: cover; /* Ajusta a imagem para cobrir toda a tela */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
-}
+    
+  }
 
-.container {
+  .title-quadro{
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Container centralizado */
+  .container {
     max-width: 800px;
     margin: 20px auto;
     padding: 10px;
@@ -13,20 +22,21 @@ body {
     border: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-}
-
-.toolbar {
+  }
+  
+  /* Barra de ferramentas */
+  .toolbar {
     display: flex;
-    justify-content: start;
+    align-items: center;
     gap: 5px;
     margin-bottom: 10px;
     background-color: #f3f3f3;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-}
-
-.toolbar button {
+  }
+  
+  .toolbar button {
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -38,17 +48,36 @@ body {
     justify-content: center;
     width: 35px;
     height: 35px;
-}
-
-.toolbar button:hover {
+  }
+  
+  .toolbar button:hover {
     background-color: #e7e7e7;
-}
-
-.toolbar button i {
+  }
+  
+  .toolbar button i {
     font-size: 16px;
-}
-
-.editor {
+  }
+  
+  /* Select e Color Picker */
+  #languageSelector {
+    height: 35px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 5px;
+  }
+  
+  #colorPicker {
+    width: 40px;
+    height: 35px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Área editável */
+  .editor {
     min-height: 300px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -58,30 +87,40 @@ body {
     font-size: 16px;
     line-height: 1.6;
     white-space: pre-wrap;
-}
-
-.message {
+  }
+  
+  /* Mensagem de status */
+  .message {
     color: green;
     font-size: 14px;
     margin-top: 10px;
     display: none;
-}
-
-pre {
+  }
+  
+  /* Formatação de blocos de código <pre><code> */
+  
+  /* 
+     Prism.js já aplica boa parte do estilo e das cores com base no tema escolhido,
+     mas você pode ajustar se quiser mudar o background ou a cor do texto manualmente.
+  */
+  pre {
     padding: 10px;
     border-radius: 5px;
     overflow-x: auto;
     margin: 10px 0;
-    background-color: #282a36; /* Dracula theme background */
-    color: #f8f8f2; /* Dracula theme foreground */
     font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
     white-space: pre-wrap;
-}
-
-code.hljs {
+    /* O tema do Prism "Tomorrow Night" já define o background, 
+       mas se preferir, você pode forçar outro valor:
+       background: #2d2d2d; 
+       color: #ccc; 
+    */
+  }
+  
+  /* O Prism usa classes como .language-javascript, .token, .keyword etc. */
+  code[class*="language-"] {
     display: block;
     white-space: pre-wrap;
-}
-
-
+    font-size: 14px;
+  }
+  

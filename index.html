@@ -1,36 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rich Text Editor</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/dracula.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Editor de Texto</title>
+  <link rel="icon" href="imagens/note.png" type="image/png">
+
+  <!-- Estilos do editor -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Prism.js - Tema (ex: "Tomorrow Night"). Você pode trocar por outro. -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+  />
+
+  <!-- Font Awesome para ícones -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+  />
 </head>
 <body>
-    <div class="container">
-        <div class="toolbar">
-            <button onclick="execCommand('bold')"><i class="fas fa-bold"></i></button>
-            <button onclick="execCommand('italic')"><i class="fas fa-italic"></i></button>
-            <button onclick="execCommand('underline')"><i class="fas fa-underline"></i></button>
-            <button onclick="execCommand('strikeThrough')"><i class="fas fa-strikethrough"></i></button>
-            <button onclick="execCommand('justifyLeft')"><i class="fas fa-align-left"></i></button>
-            <button onclick="execCommand('justifyCenter')"><i class="fas fa-align-center"></i></button>
-            <button onclick="execCommand('justifyRight')"><i class="fas fa-align-right"></i></button>
-            <button onclick="execCommand('justifyFull')"><i class="fas fa-align-justify"></i></button>
-            <button onclick="execCommand('insertUnorderedList')"><i class="fas fa-list-ul"></i></button>
-            <button onclick="execCommand('insertOrderedList')"><i class="fas fa-list-ol"></i></button>
-            <button onclick="execCommand('createLink', prompt('Enter URL:'))"><i class="fas fa-link"></i></button>
-            <button onclick="execCommand('unlink')"><i class="fas fa-unlink"></i></button>
-            <button onclick="execCommand('insertImage', prompt('Enter image URL:'))"><i class="fas fa-image"></i></button>
-            <button onclick="execCommand('removeFormat')"><i class="fas fa-eraser"></i></button>
-            <button onclick="formatCode()"><i class="fas fa-code"></i></button>
-        </div>
-        <div id="editor" contenteditable="true" class="editor"></div>
-        <p id="message" class="message"></p>
+  <h1 class="title-quadro">Editor de Texto</h1>
+  <div class="container">
+    
+    <div class="toolbar">
+      <!-- Botões de formatação padrão -->
+      <button onclick="execCommand('bold')"><i class="fas fa-bold"></i></button>
+      <button onclick="execCommand('italic')"><i class="fas fa-italic"></i></button>
+      <button onclick="execCommand('underline')"><i class="fas fa-underline"></i></button>
+      <button onclick="execCommand('strikeThrough')"><i class="fas fa-strikethrough"></i></button>
+      <button onclick="execCommand('justifyLeft')"><i class="fas fa-align-left"></i></button>
+      <button onclick="execCommand('justifyCenter')"><i class="fas fa-align-center"></i></button>
+      <button onclick="execCommand('justifyRight')"><i class="fas fa-align-right"></i></button>
+      <button onclick="execCommand('justifyFull')"><i class="fas fa-align-justify"></i></button>
+      <button onclick="execCommand('insertUnorderedList')"><i class="fas fa-list-ul"></i></button>
+      <button onclick="execCommand('insertOrderedList')"><i class="fas fa-list-ol"></i></button>
+      <button onclick="execCommand('createLink', prompt('Entre com a URL:'))">
+        <i class="fas fa-link"></i>
+      </button>
+      <button onclick="execCommand('unlink')"><i class="fas fa-unlink"></i></button>
+      <button onclick="execCommand('insertImage', prompt('Entre com a URL da imagem:'))">
+        <i class="fas fa-image"></i>
+      </button>
+      <button onclick="execCommand('removeFormat')"><i class="fas fa-eraser"></i></button>
+
+      <!-- Seletor de linguagem para formatar código -->
+      <select id="languageSelector" title="Escolha uma linguagem para seu código">
+        <option value="">Ling.</option>
+        <option value="javascript">JavaScript</option>
+        <option value="python">Python</option>
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="java">Java</option>
+        <!-- Adicione mais opções/línguas conforme desejar -->
+      </select>
+
+      <!-- Botão para transformar o texto em código -->
+      <button onclick="formatCode()">
+        <i class="fas fa-code"></i>
+      </button>
+
+      <!-- Color Picker para mudar a cor do texto -->
+      <input
+        type="color"
+        id="colorPicker"
+        value="#000000"
+        onchange="changeTextColorPicker()"
+        title="Escolha uma cor para o texto"
+      />
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script src="script.js"></script>
+
+    <!-- Área editável -->
+    <div id="editor" contenteditable="true" class="editor">
+      <!-- Você pode digitar seu código ou texto aqui... -->
+      
+    </div>
+
+    <!-- Mensagem de status -->
+    <p id="message" class="message"></p>
+  </div>
+
+  <!-- Prism.js - Núcleo -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+
+  <!-- Prism.js - Linguagens necessárias
+       (adicione as que correspondem ao <select> acima) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+
+  <!-- Prism.js - Plugin para linha de código opcional (Exemplo) -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+  <!-- Script principal -->
+  <script src="script.js"></script>
 </body>
 </html>
